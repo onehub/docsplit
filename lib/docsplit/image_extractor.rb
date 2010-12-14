@@ -28,7 +28,7 @@ module Docsplit
     # Now we generate one page at a time, a counterintuitive opimization
     # suggested by the GraphicsMagick list, that seems to work quite well.
     def convert(pdf, size, format, previous=nil)
-      tempdir   = Dir.mktmpdir
+      tempdir   = Dir.mktmpdir(nil,@tmpdir)
       basename  = File.basename(pdf, File.extname(pdf))
       directory = directory_for(size)
       pages     = @pages || '1-' + Docsplit.extract_length(pdf).to_s
@@ -61,6 +61,7 @@ module Docsplit
       @sizes   = [options[:size]].flatten.compact
       @sizes   = [nil] if @sizes.empty?
       @rolling = !!options[:rolling]
+      @tmpdir  = options[:tmp]
     end
 
     # If there's only one size requested, generate the images directly into

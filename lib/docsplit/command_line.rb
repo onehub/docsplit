@@ -73,6 +73,9 @@ Options:
     def parse_options
       @options = {:ocr => :default, :clean => true}
       @option_parser = OptionParser.new do |opts|
+        opts.on('-t', '--tmpsubdir [DIR]', 'set the directory for all output') do |t|
+          @options[:tmp] = t
+        end
         opts.on('-o', '--output [DIR]', 'set the directory for all output') do |d|
           @options[:output] = d
         end

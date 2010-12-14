@@ -57,7 +57,7 @@ module Docsplit
 
     # Extract a page range worth of text from a PDF via OCR.
     def extract_from_ocr(pdf, pages)
-      tempdir = Dir.mktmpdir
+      tempdir = Dir.mktmpdir(nil,@tmpdir)
       base_path = File.join(@output, @pdf_name)
       if pages
         pages.each do |page|
@@ -119,6 +119,7 @@ module Docsplit
       @force_ocr  = options[:ocr] == true
       @forbid_ocr = options[:ocr] == false
       @clean_ocr  = !(options[:clean] == false)
+      @tmpdir     = options[:tmp]
     end
 
   end
